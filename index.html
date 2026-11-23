@@ -446,6 +446,60 @@ p{margin:0}
 .fireb.cbk{background:linear-gradient(90deg,#5C7CFF,#21C17A)}
 .bankrules.reorg div b{min-width:7.5em}
 .lostb{font-size:12px;font-weight:700;color:#fff;background:var(--bad);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:2px}
+
+/* ---- Skill quest map ---- */
+.stage.qstage{background:linear-gradient(90deg,#E9FBE0,#FFF7DD);border-color:#8ED36E}
+.stage.qstage .no{font-family:inherit;font-size:22px}
+.qgame{grid-template-columns:minmax(0,1fr) 360px}
+.qmap{position:relative;background:#2E6B3A;border-radius:30px;padding:8px;box-shadow:0 0 0 4px #FFC94D,0 12px 0 #1E4A28}
+.qmapsvg{width:100%;height:auto;display:block;max-height:calc(100vh - 130px)}
+.qnode{cursor:pointer;outline:none}
+.qnode:focus-visible>circle:nth-of-type(1),.qnode:hover>circle:first-of-type{filter:brightness(1.05)}
+.qnode .qring{fill:none;stroke-width:8;animation:qpulse 1s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes qpulse{from{opacity:.35;transform:scale(.95)}to{opacity:1;transform:scale(1.06)}}
+.qnode.q-lock,.qnode.q-lockf{opacity:.55}
+.qtok{animation:qbob 1s ease-in-out infinite alternate}
+@keyframes qbob{from{transform:translateY(0)}to{transform:translateY(-5px)}}
+.qpickbar{position:absolute;left:50%;top:16px;transform:translateX(-50%);z-index:2;display:flex;align-items:center;gap:10px;background:#fff;border:3px solid var(--tc);border-radius:999px;padding:6px 8px 6px 6px;font-size:clamp(14px,1.5vw,18px);box-shadow:0 6px 0 rgba(0,0,0,.15);white-space:nowrap}
+.qside{gap:10px}
+.qcard{gap:8px}
+.qpts{font-weight:900;font-size:20px}
+.qbadges{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.qbadges.big{justify-content:center;gap:8px}
+.qbadge.nw{animation:slotnew .9s ease-out .4s both}
+.qnow{display:flex;align-items:center;gap:8px;justify-content:space-between;font-weight:700;font-size:15px;background:#fff;border-radius:12px;padding:6px 10px}
+.qtime{font-family:Georgia,serif;font-weight:800;font-variant-numeric:tabular-nums;font-size:18px}
+.qtime.running{color:var(--accent)}
+.qtime.over{color:var(--bad)}
+.qtime.big{font-size:clamp(44px,6vw,72px);line-height:1}
+.qall{font-weight:800;color:var(--good)}
+.qrules{font-size:14px}
+.modal.qchm{max-width:900px}
+.qchead{display:flex;align-items:center;gap:18px}
+.qchn{font-size:clamp(30px,4vw,48px)}
+.qstd{display:flex;flex-direction:column;gap:8px}
+.qck{display:flex;align-items:center;gap:12px;text-align:left;border:2px solid var(--line);background:var(--bg);border-radius:14px;padding:10px 14px;font-size:clamp(16px,1.8vw,21px);font-weight:700}
+.qck .box{width:30px;height:30px;flex:none;border-radius:8px;border:3px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+.qck.on{border-color:var(--good);background:#E8FFF3}
+.qck.on .box{background:var(--good);border-color:var(--good)}
+.qtimer{display:flex;align-items:center;gap:16px;justify-content:center;flex-wrap:wrap;background:var(--bg2);border-radius:18px;padding:12px}
+.qact{align-items:center}
+.qtier .tbtn{gap:6px}
+.qtier .tbtn .tmeta{font-size:13px;text-align:center}
+.qbigbadge{animation:stampin .6s cubic-bezier(.2,1.6,.4,1) both;filter:drop-shadow(0 10px 18px rgba(0,0,0,.25))}
+.qinfo{display:flex;flex-direction:column;gap:8px}
+.qirow{display:grid;grid-template-columns:auto auto 1fr;gap:10px;align-items:baseline}
+.qwho{display:inline-flex;align-items:center;gap:6px;margin-right:12px}
+.qrk .qbadges{flex-wrap:nowrap}
+.qref{display:flex;flex-wrap:wrap;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px}
+.qref.morse span{display:inline-flex;gap:6px;align-items:baseline;min-width:76px;font-family:Georgia,serif;font-size:18px;letter-spacing:2px}
+.qref.morse b{font-family:var(--font);color:var(--accent)}
+.qref.trail{justify-content:space-around}
+.qref.trail figure{margin:0;text-align:center;width:130px}
+.qref.trail svg{width:120px;height:60px}
+.qref.trail figcaption{font-weight:700;font-size:14px}
+@media (max-width:980px){.qgame{grid-template-columns:1fr}.qmapsvg{max-height:none}}
+@media (max-width:560px){.qpickbar{white-space:normal;left:12px;right:12px;transform:none}.qirow{grid-template-columns:1fr}.qchead{flex-direction:column;align-items:flex-start}}
 /* dopamine accents */
 body{background-color:var(--bg);background-image:radial-gradient(circle at 6% 10%,var(--deco1) 0 140px,transparent 141px),radial-gradient(circle at 96% 30%,var(--deco2) 0 180px,transparent 181px),radial-gradient(circle at 40% 105%,var(--deco3) 0 220px,transparent 221px);background-attachment:fixed}
 .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;box-shadow:0 4px 0 var(--ink)}
@@ -1857,7 +1911,7 @@ const WIT=[
 const STAGES=[
  {id:"taiwan",no:"1",n:"台灣童軍大富翁",s:"台灣景點、童軍、文化、English",ok:true},
  {id:"world",no:"2",n:"世界童軍環遊",s:"飛到 16 個國家，花童軍幣買題目挑戰",ok:true},
- {id:"mongolia",no:"3",n:"蒙古大草原",s:"花童軍幣挑戰草原、歷史、大露營題",ok:true}
+ {id:"mongolia",no:"3",n:"蒙古大草原",s:"花童軍幣挑戰急救、草原、大露營題",ok:true}
 ];
 const STAGEDATA={
  taiwan:{cells:CELLS,qb:QB,aid:AID,chance:CHANCE,fate:FATE,fun:FUN,eyebrow:"Stage 1 · Taiwan",title:"台灣童軍大富翁"},
@@ -2466,7 +2520,7 @@ function leftIn(tier,cellName){const g=G();return ST.qb.filter((q,i)=>q[1]===tie
 function winnerOf(g){const e=g.earn||[0];return e.map((_,i)=>i).sort((a,b)=>e[b]-e[a])[0]}
 
 // ---------- render ----------
-function render(){const app=document.getElementById("app");app.innerHTML="";if(view.screen==="home")renderHome(app);else renderGame(app)}
+function render(){const app=document.getElementById("app");app.innerHTML="";if(view.screen==="home")renderHome(app);else if(view.screen==="quest")renderQuest(app);else renderGame(app)}
 function renderHome(app){
   app.append($(`<div class="top"><div><p class="eyebrow">Scout Monopoly</p><h1>童軍大富翁</h1></div><div class="spacer"></div><p class="status" id="status">${db?"已連線雲端":"自動存在這台電腦"}</p><button class="btn small" id="fs">全螢幕</button>${window.claude?"":`<button class="btn small" id="exp">備份紀錄</button><label class="btn small" for="imp">還原紀錄</label><input type="file" id="imp" accept=".json,application/json" hidden>`}</div>`));
   app.querySelector("#fs").onclick=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}catch(e){}};
@@ -2484,7 +2538,7 @@ function renderHome(app){
       const el=$(`<div class="team-in"><span class="dot" style="background:${TEAMC[ti]}"></span><input id="t${ci}_${ti}" value="${esc(t)}" aria-label="小隊名稱"><button class="tdel" title="刪除這個小隊" aria-label="刪除${esc(t)}" ${c.teams.length<=MINT?"disabled":""}>×</button></div>`);
       el.querySelector("input").addEventListener("change",e=>{c.teams[ti]=e.target.value||`第 ${ti+1} 小隊`;save()});
       el.querySelector(".tdel").onclick=()=>askSure(`刪除「${t}」？`,"這個小隊的童軍幣和每一站的紀錄都會一起刪掉，其他小隊不受影響。","刪除小隊",()=>{
-        c.teams.splice(ti,1);if(c.wallet)c.wallet.splice(ti,1);if(c.loan)c.loan.splice(ti,1);
+        c.teams.splice(ti,1);if(c.quest)c.quest.teams.splice(ti,1);if(c.wallet)c.wallet.splice(ti,1);if(c.loan)c.loan.splice(ti,1);
         Object.values(c.games).forEach(g=>{["lap","pos","earn"].forEach(k=>{if(g[k])g[k].splice(ti,1)});if(g.turn>ti)g.turn--;if(g.turn>=c.teams.length)g.turn=0});
         save();render()});
       tw.append(el);
@@ -2498,6 +2552,8 @@ function renderHome(app){
       if(s.ok)b.addEventListener("click",()=>{view={screen:"game",cls:ci,stage:s.id};ST=STAGEDATA[s.id];if(!c.games[s.id]){c.games[s.id]=newGame();save()}render()});
       st.append(b);
     });
+    {const q=c.quest;let sub="繩結、急救、方位、通訊……完成關卡拿徽章";if(q&&q.teams.some(T=>Object.keys(T.done).length)){const pts=c.teams.map((_,t)=>Object.values((q.teams[t]||{done:{}}).done).reduce((a,d)=>a+d.lv,0));const b=pts.indexOf(Math.max(...pts));sub=`進行中・領先：${esc(c.teams[b])}（⭐ ${pts[b]}）`}
+     const qb=$(`<button class="stage qstage"><span class="no">🗺️</span><span><b>技能闖關地圖</b><br><span class="sub">${sub}</span></span></button>`);qb.onclick=()=>{view={screen:"quest",cls:ci,stage:view.stage||"taiwan"};render()};st.append(qb)}
     // cumulative scoreboard: every stage's score stays, totals add up across stages
     const head=STAGES.map(s=>`<th title="${s.n}">第${s.no}站</th>`).join("");
     const wal=c.teams.map((_,i)=>(c.wallet&&c.wallet[i]!=null)?c.wallet[i]:500);
@@ -2507,7 +2563,7 @@ function renderHome(app){
     });
     const best=Math.max(...rows.map(r=>r.tot));
     card.append($(`<div class="score"><p class="score-t">童軍幣（三站共用，一直累積下去）</p><div class="score-wrap"><table><tr><th></th>${head}<th>現在</th></tr>${rows.map(r=>r.tot===best?r.html.replace('class="tot"','class="tot top"'):r.html).join("")}</table></div><p class="score-t" style="font-weight:400">每站欄位是那一站賺或賠的童軍幣；起始每隊 500。</p></div>`));
-    card.querySelector('[data-act="clear"]').onclick=()=>askSure(`清除「${c.name}」的所有紀錄？`,"三站的棋盤、分數和童軍幣都會回到起點（每隊 500），班級和小隊名稱會保留。這個動作不能復原。","清除紀錄",()=>{c.games={};delete c.wallet;delete c.loan;save();render();setStatus(`已清除「${c.name}」的紀錄`)});
+    card.querySelector('[data-act="clear"]').onclick=()=>askSure(`清除「${c.name}」的所有紀錄？`,"三站的棋盤、分數和童軍幣都會回到起點（每隊 500），班級和小隊名稱會保留。這個動作不能復原。","清除紀錄",()=>{c.games={};delete c.wallet;delete c.loan;delete c.quest;save();render();setStatus(`已清除「${c.name}」的紀錄`)});
     card.querySelector('[data-act="del"]').onclick=()=>askSure(`刪除「${c.name}」？`,"這個班級和它所有的紀錄都會被刪掉，不能復原。","刪除班級",()=>{S.classes.splice(ci,1);save();render();setStatus(`已刪除「${c.name}」`)});
     grid.append(card);
   });
@@ -2849,6 +2905,207 @@ function closeModal(){if(ov){ov.remove();ov=null}}
 window.addEventListener('error',()=>{setTimeout(()=>{if(busy&&!ov){busy=false;try{render()}catch(e){}}},800)});
 window.addEventListener('unhandledrejection',()=>{setTimeout(()=>{if(busy&&!ov){busy=false;try{render()}catch(e){}}},800)});
 
+
+// ---------- 技能闖關地圖：關卡資料 ----------
+const MORSE=[["A","·–"],["B","–···"],["C","–·–·"],["D","–··"],["E","·"],["F","··–·"],["G","––·"],["H","····"],["I","··"],["J","·–––"],["K","–·–"],["L","·–··"],["M","––"],["N","–·"],["O","–––"],["P","·––·"],["Q","––·–"],["R","·–·"],["S","···"],["T","–"],["U","··–"],["V","···–"],["W","·––"],["X","–··–"],["Y","–·––"],["Z","––··"]];
+const MORSE_REF=`<div class="qref morse">${MORSE.map(([a,b])=>`<span><b>${a}</b>${b}</span>`).join("")}</div>`;
+const TRAIL_REF=`<div class="qref trail">
+<figure><svg viewBox="0 0 120 60"><line x1="10" y1="30" x2="100" y2="30" stroke="#6B4423" stroke-width="8" stroke-linecap="round"/><path d="M78,12 L104,30 L78,48" fill="none" stroke="#6B4423" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/></svg><figcaption>往這條路走</figcaption></figure>
+<figure><svg viewBox="0 0 120 60"><line x1="35" y1="8" x2="85" y2="52" stroke="#6B4423" stroke-width="8" stroke-linecap="round"/><line x1="85" y1="8" x2="35" y2="52" stroke="#6B4423" stroke-width="8" stroke-linecap="round"/></svg><figcaption>不是這條路</figcaption></figure>
+<figure><svg viewBox="0 0 120 60"><circle cx="60" cy="30" r="22" fill="none" stroke="#6B4423" stroke-width="7"/><circle cx="60" cy="30" r="6" fill="#6B4423"/></svg><figcaption>終點／回家了</figcaption></figure>
+<figure><svg viewBox="0 0 120 60"><rect x="12" y="10" width="40" height="40" fill="none" stroke="#6B4423" stroke-width="6"/><text x="32" y="40" text-anchor="middle" font-size="26" font-weight="800" fill="#6B4423">5</text><line x1="62" y1="30" x2="106" y2="30" stroke="#6B4423" stroke-width="6" stroke-linecap="round"/><path d="M90,18 L108,30 L90,42" fill="none" stroke="#6B4423" stroke-width="6" stroke-linecap="round"/></svg><figcaption>往這個方向 5 步有訊息</figcaption></figure></div>`;
+const QSTATIONS=[
+ {id:"base",n:"營本部",ic:"⛺",col:"#FF8A5C",x:110,y:520,start:true,d:"大家從這裡出發！"},
+ {id:"knot1",n:"基礎繩結站",ic:"🪢",col:"#FFB703",x:290,y:430,d:"平結、八字結、雙套結、稱人結",ch:{
+  1:[{n:"平結",d:"用兩條同樣粗細的繩子打一個平結，並說出平結的一種用途。",std:["左右對稱，兩個繩頭在同一側","拉兩條主繩不會滑動","說得出用途（例如連接兩條繩子、三角巾包紮）"],t:60},
+     {n:"八字結",d:"在繩子尾端打一個八字結，並說出它的用途。",std:["形狀是清楚的「8」字","拉緊後不會鬆開","說得出用途（防止繩尾從孔洞滑出）"],t:45}],
+  2:[{n:"雙套結",d:"在竹竿或桌腳上打一個雙套結。",std:["兩圈交叉，繩頭從中間反方向穿出","拉主繩不會沿著竹竿滑動","全程不超過時間"],t:60},
+     {n:"稱人結",d:"用「兔子出洞、繞過大樹、回到洞裡」的方法，在桌腳或隊友腰上打稱人結。",std:["繩圈大小固定，拉主繩圈不會縮小","繩頭留在繩圈裡面","繩頭至少留一個拳頭長"],t:90}],
+  3:[{n:"閉眼稱人結",d:"派一位隊員閉上眼睛，自己打出稱人結（隊友不能幫忙，可以口頭提醒一次）。",std:["結型正確","繩圈不會縮小","在時間內完成"],t:120},
+     {n:"四結速打",d:"同一個人連續打出平結、八字結、雙套結、稱人結。",std:["四個結都正確","打完一個才能打下一個","在時間內完成"],t:150}]}},
+ {id:"aid",n:"急救站",ic:"🩹",col:"#FF6B6B",x:230,y:225,d:"三角巾、繃帶、CPR 流程",ch:{
+  1:[{n:"大手掛",d:"幫一位隊員用三角巾做大手掛（假設前臂受傷）。",std:["整隻前臂被托住，手腕略高於手肘","結打在鎖骨上方凹陷處，不壓在頸後","指尖露出來，按指甲 2 秒內恢復紅潤"],t:120},
+     {n:"叫叫 CABD",d:"全隊輪流說出並比出 CPR 的「叫叫 CABD」每一步。",std:["叫：拍肩確認意識","叫：請人打 119、拿 AED","C 壓胸、A 暢通呼吸道、B 人工呼吸、D 使用 AED"],t:60}],
+  2:[{n:"頭部帽式包紮",d:"用三角巾幫隊員做頭部帽式包紮。",std:["底邊齊眉、頂角垂在頸後","兩底角在枕骨下方交叉後繞回前額打結","頂角塞好，包紮平整不鬆脫"],t:150},
+     {n:"腳踝 8 字形包紮",d:"用彈性繃帶幫隊員做腳踝 8 字形包紮。",std:["從腳掌環形固定開始","在腳踝前方做 8 字交叉，每圈蓋住前一圈約一半","腳趾露出來，不會太緊"],t:150},
+     {n:"復甦姿勢",d:"一位隊員當昏迷但有呼吸的傷患，其他人把他擺成復甦姿勢（側臥）。",std:["側臥穩定，上方的腳彎曲撐住","頭稍微後仰，嘴巴朝下","說得出要持續觀察呼吸"],t:90}],
+  3:[{n:"小腿骨折固定",d:"沒有夾板！用三角巾窄帶把受傷的小腿跟另一條腿固定在一起。",std:["兩腿之間加墊（衣服、毛巾）","骨折處上下都有綁到，結打在健側","固定後檢查腳趾循環"],t:180},
+     {n:"雙人四手座搬運",d:"兩位隊員用四手座把一位「腳受傷」的隊員安全搬運到 5 公尺外。",std:["兩人手腕互握成穩定的椅子","傷患雙手扶住搬運者肩膀","全程平穩，安全放下"],t:120},
+     {n:"情境：扭傷＋流鼻血",d:"一位隊員爬山扭傷腳踝，又流鼻血。全隊分工處理，邊做邊說出步驟。",std:["鼻血：坐下、頭稍微前傾、捏住鼻翼約 10 分鐘，不要仰頭","扭傷：說出 PRICE（保護、休息、冰敷、加壓、抬高）","分工清楚，有人負責求救或聯絡老師"],t:180}]}},
+ {id:"compass",n:"方位站",ic:"🧭",col:"#3A86FF",x:450,y:140,d:"指北針、方位角、步測",ch:{
+  1:[{n:"找正北",d:"用指北針找出正北，全隊一起指向北方。",std:["指北針平放，紅色指針對準 N","全隊方向一致","說得出地圖上方通常是北方"],t:60},
+     {n:"八個方位",d:"全隊輪流說出並指出八個方位（北、東北、東、東南、南、西南、西、西北）。",std:["八個方位都正確","手指方向跟指北針一致"],t:60}],
+  2:[{n:"方位角",d:"老師說一個方位角（例如 120°），小隊用指北針找出那個方向，並說出那個方向有什麼東西。",std:["指北針刻度轉到指定角度","紅針對準 N 後，前進方向正確","誤差在 10° 以內"],t:90},
+     {n:"手錶找南方",d:"用指針手錶和太陽找出南方（沒有太陽時，老師指定燈光當太陽）。",std:["時針對準太陽","時針和 12 點的正中間就是南方","說得出這個方法適用在北半球"],t:90}],
+  3:[{n:"反方位角",d:"老師說三個方位角，小隊算出它們的反方位角，並用指北針指出來。",std:["小於 180° 加 180，大於 180° 減 180","三題都算對","指的方向正確"],t:120},
+     {n:"步測 20 公尺",d:"先量出自己走 10 公尺要幾步，再只靠數步數，走到老師指定的 20 公尺處停下（不能看捲尺）。",std:["先算出自己的步幅","停下的位置誤差在 2 公尺內"],t:180}]}},
+ {id:"knot2",n:"進階繩結站",ic:"🪢",col:"#E07A00",x:520,y:330,d:"接繩結、營釘結、縮結、綑綁",ch:{
+  1:[{n:"接繩結",d:"把一條粗繩和一條細繩用接繩結連在一起。",std:["粗繩做成彎","細繩從下穿上、繞過彎後面，壓在自己下面","用力拉不會鬆脫"],t:90},
+     {n:"營釘結",d:"把繩子繞過桌腳（當作營釘），打一個可以調整鬆緊的營釘結。",std:["繩圈內側繞兩圈、外側繞一圈","結可以滑動調整長度","受力時不會自己滑動"],t:90}],
+  2:[{n:"縮結",d:"用縮結把一條長繩縮短。",std:["繩子摺成 S 形","兩端的彎各用一個半結套住","拉兩端時結不會散開"],t:90},
+     {n:"繫木結",d:"用繫木結綁住一根木棍（或掃把），拖動 3 公尺。",std:["繩子繞木棍後再繞過主繩","繩頭在自己身上纏繞至少 3 圈","拖動時不鬆脫"],t:90}],
+  3:[{n:"方形綑綁",d:"用方形綑綁（方回綑綁）把兩根竹竿綁成十字。",std:["用雙套結起頭","綑繞 3–4 圈，再絞緊 2–3 圈","用雙套結收尾，竹竿不會晃動"],t:240},
+     {n:"三腳架綑綁",d:"用三根竹竿做一個能站穩的三腳架。",std:["三根竹竿並排，雙套結起頭","上下交錯纏繞後在竿子之間絞緊","打開三腳後可以穩穩站立"],t:300}]}},
+ {id:"camp",n:"營建站",ic:"⛺",col:"#21C17A",x:690,y:470,d:"選營地、營釘、收繩",ch:{
+  1:[{n:"選營地",d:"全隊說出搭帳篷選營地的 4 個原則。",std:["地面平坦、略高、排水好","遠離溪床和河床","避開落石、枯枝下方和風口","離水源近，但不在水邊"],t:60},
+     {n:"整理收繩",d:"把一條長繩整齊收好，再拋出去，繩子不能打結。",std:["收得整齊、長度一致","尾端有固定","拋出後順利展開沒有打結"],t:90}],
+  2:[{n:"營釘角度",d:"用筆或筷子當營釘，示範營釘打入的角度和營繩的方向。",std:["營釘向帳篷外側傾斜約 45°","營繩跟營釘大約成直角","說得出為什麼要這樣打"],t:60},
+     {n:"兩人搭帳",d:"兩位隊員合作搭好一頂圓頂帳（沒有帳篷時老師可按「換一題」）。",std:["營柱正確穿好","四角營釘固定","外帳平整不碰內帳"],t:300}],
+  3:[{n:"剪式綑綁",d:"把兩根竹竿用剪式綑綁綁在一起，再打開成 A 字形。",std:["雙套結起頭","兩竿之間繞 6–8 圈後絞緊","打開後能撐住、不會滑開"],t:240},
+     {n:"營地配置圖",d:"在白紙上畫出一個小隊營地配置圖：帳篷、炊事區、水源、廁所、垃圾區。",std:["炊事區在帳篷下風處","廁所和垃圾區遠離水源和炊事區","標示方位（北方）"],t:240}]}},
+ {id:"fire",n:"炊事站",ic:"🍳",col:"#FF5A36",x:740,y:230,d:"升火、滅火、爐具安全",ch:{
+  1:[{n:"燃燒三要素",d:"說出燃燒三要素，並說出滅火是拿掉哪一個。",std:["燃料、氧氣、熱（溫度）","舉出一個滅火的例子並說出拿掉哪一個"],t:45},
+     {n:"火材排順序",d:"老師準備（或畫出）引火物、火種、柴薪，小隊按照升火的順序排好並說明。",std:["順序：引火物 → 火種 → 柴薪","說得出每一種的例子"],t:60}],
+  2:[{n:"火堆造型",d:"用筷子或樹枝排出「井字型」和「錐型（金字塔型）」兩種火堆。",std:["兩種造型都正確","中間留空間讓空氣流通","說得出各自的優點"],t:120},
+     {n:"營火熄滅",d:"說出並示範營火熄滅的步驟。",std:["澆水","攪拌灰燼","再澆水，直到手背靠近感覺不到熱度"],t:60}],
+  3:[{n:"鍋子起火",d:"情境：炒菜時鍋子起火了！全隊說出正確處理步驟，並說出絕對不能做的事。",std:["關火","蓋上鍋蓋（或濕布）隔絕氧氣","絕對不能潑水"],t:60},
+     {n:"卡式爐安全",d:"說出使用卡式爐的 4 個安全要點。",std:["瓦斯罐卡榫對準、確實裝好","不能用太大的鍋子蓋到瓦斯罐","保持通風，周圍沒有易燃物","用完把瓦斯罐拆下"],t:90}]}},
+ {id:"signal",n:"通訊站",ic:"📡",col:"#8338EC",x:900,y:120,d:"摩斯密碼、童軍手號",ref:MORSE_REF,ch:{
+  1:[{n:"打出 SOS",d:"用手電筒、拍手或哨子打出摩斯密碼 SOS。",std:["··· ––– ···","短音和長音分得清楚","字母之間有停頓"],t:45},
+     {n:"童軍禮與手號",d:"全隊一起做出童軍禮和童軍手號，並說出三指的意義。",std:["動作正確整齊","三指代表童軍諾言的三項"],t:45}],
+  2:[{n:"摩斯解碼",d:"老師用拍手或哨子打出一個 3 個字母的英文字，小隊看摩斯表解出來。",std:["三個字母都正確","在時間內完成"],t:120}],
+  3:[{n:"摩斯傳訊",d:"小隊自己選一個 4 個字母的英文字（例如 CAMP），一人看表打碼，其他人背對著解碼。",std:["打碼的人不能說話、不能比手勢","解出的字完全正確","在時間內完成"],t:180}]}},
+ {id:"track",n:"追蹤站",ic:"👣",col:"#8C5A2B",x:900,y:370,d:"追蹤記號、觀察力",ref:TRAIL_REF,ch:{
+  1:[{n:"認記號",d:"老師指著下面的追蹤記號，小隊說出意思。",std:["四個記號都說對"],t:45},
+     {n:"金氏遊戲",d:"老師拿出 10 樣小東西給大家看 30 秒，蓋起來後小隊寫下所有記得的東西。",std:["寫對至少 8 樣"],t:90}],
+  2:[{n:"擺記號",d:"用樹枝、石頭或筆在地上（或桌上）擺出「往這條路」「不是這條路」「終點」三個記號。",std:["三個記號都正確","別的小隊看得懂"],t:90}],
+  3:[{n:"循跡尋寶",d:"老師（或另一隊）先在教室裡擺好追蹤記號並藏一樣東西，小隊照記號找出來。",std:["照記號走，不亂找","找到藏起來的東西","在時間內完成"],t:240}]}},
+ {id:"finale",n:"大營火",ic:"🔥",col:"#E8175D",x:930,y:550,finale:true,d:"拿到 5 枚徽章才能挑戰！",ch:{
+  1:[{n:"隊呼＋規律",d:"全隊喊出小隊隊呼，再一起說出童軍規律中的三條。",std:["隊呼整齊響亮","三條規律都正確"],t:60}],
+  2:[{n:"繩結接力",d:"全隊每人輪流打一個不同的結（平結、八字結、雙套結、稱人結……），一個人打完下一個人才能開始。",std:["每個人的結都正確","每個結都不同","在時間內完成"],t:120}],
+  3:[{n:"蒙眼稱人結",d:"一位隊員蒙住眼睛，只靠隊友口頭指導打出稱人結（隊友不能碰繩子）。",std:["隊友只用說的","結型正確，繩圈不會縮小","在時間內完成"],t:180}]}}
+];
+const QEDGES=[["base","knot1"],["base","aid"],["knot1","aid"],["knot1","knot2"],["aid","compass"],["compass","knot2"],["compass","fire"],["knot2","camp"],["knot2","fire"],["fire","signal"],["fire","track"],["camp","track"],["signal","track"],["track","finale"],["camp","finale"]];
+const QLV={1:{n:"初級",star:"★",tier:"銅",col:"#CD7F32"},2:{n:"中級",star:"★★",tier:"銀",col:"#A7B4C2"},3:{n:"高級",star:"★★★",tier:"金",col:"#FFC94D"}};
+const QFINALE_NEED=5;
+
+// ---------- 技能闖關地圖：畫面與流程 ----------
+const QMAP=Object.fromEntries(QSTATIONS.map(s=>[s.id,s]));
+const QCH=QSTATIONS.filter(s=>!s.start);
+function QS(){const c=cls();if(!c.quest)c.quest={v:1,teams:[]};const q=c.quest;while(q.teams.length<c.teams.length)q.teams.push({done:{},cur:null});return q}
+function qT(t){return QS().teams[t]}
+function qPts(t){return Object.values(qT(t).done).reduce((a,d)=>a+d.lv,0)}
+function qCount(t){return Object.keys(qT(t).done).length}
+function qGold(t){return Object.values(qT(t).done).filter(d=>d.lv===3).length}
+function qMs(t){return Object.values(qT(t).done).reduce((a,d)=>a+(d.ms||0),0)}
+function qNeighbors(id){return QEDGES.filter(e=>e.includes(id)).map(e=>e[0]===id?e[1]:e[0])}
+function qState(t,id){const T=qT(t),s=QMAP[id];if(s.start)return "base";if(T.done[id])return "done";
+  if(s.finale)return qCount(t)>=QFINALE_NEED?"open":"lockf";
+  return qNeighbors(id).some(n=>QMAP[n].start||T.done[n])?"open":"lock"}
+function qElapsed(cur){return cur?(cur.acc||0)+(cur.run?Date.now()-cur.run:0):0}
+function qFmt(ms){const s=Math.floor(ms/1000);return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`}
+function qChal(cur){return QMAP[cur.sid].ch[cur.lv][cur.ci]}
+function qBadge(st,lv,size,extra=""){const L=QLV[lv];return `<svg class="qbadge ${extra}" viewBox="0 0 100 100" width="${size}" height="${size}" aria-label="${st.n}${L.tier}徽章"><circle cx="50" cy="50" r="48" fill="${L.col}"/><circle cx="50" cy="50" r="48" fill="none" stroke="rgba(0,0,0,.18)" stroke-width="2"/><circle cx="50" cy="52" r="36" fill="${st.col}" stroke="#fff" stroke-width="4"/><text x="50" y="64" text-anchor="middle" font-size="34">${st.ic}</text><text x="50" y="16" text-anchor="middle" font-size="12" fill="#fff" font-weight="900">${L.star}</text></svg>`}
+function qEmpty(st,size){return `<svg class="qbadge empty" viewBox="0 0 100 100" width="${size}" height="${size}"><circle cx="50" cy="50" r="44" fill="#fff" stroke="#D9CBEF" stroke-width="5" stroke-dasharray="10 8"/><text x="50" y="63" text-anchor="middle" font-size="34" opacity=".35">${st.ic}</text></svg>`}
+
+function qMapSvg(){const c=cls(),pick=view.qpick;
+  const node=id=>QMAP[id];
+  let edges="";QEDGES.forEach(([a,b])=>{const A=node(a),B=node(b),mx=(A.x+B.x)/2,my=(A.y+B.y)/2,dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy),ox=-dy/L*26,oy=dx/L*26;const d=`M${A.x},${A.y} Q${mx+ox},${my+oy} ${B.x},${B.y}`;
+    edges+=`<path d="${d}" stroke="#F3E3B8" stroke-width="18" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#C79A5B" stroke-width="4" fill="none" stroke-dasharray="2 12" stroke-linecap="round"/>`});
+  const trees=[[60,90],[110,60],[160,110],[620,70],[670,110],[330,560],[380,590],[560,590],[800,600],[980,220],[960,40],[40,330],[30,420],[600,200],[360,250],[820,500]].map(([x,y],i)=>`<g transform="translate(${x},${y}) scale(${.8+(i%3)*.15})"><rect x="-4" y="10" width="8" height="14" fill="#7A4E2A"/><path d="M0,-26 L20,12 L-20,12 Z" fill="${i%2?"#2E9E5B":"#3DB36B"}"/><path d="M0,-38 L15,-6 L-15,-6 Z" fill="${i%2?"#3DB36B":"#4CC77A"}"/></g>`).join("");
+  let nodes="";QSTATIONS.forEach(s=>{const here=c.teams.map((_,t)=>t).filter(t=>qT(t).cur&&qT(t).cur.sid===s.id);const doneT=c.teams.map((_,t)=>t).filter(t=>qT(t).done[s.id]);
+    const st=pick!=null?qState(pick,s.id):"";const w=s.n.length*24+28;
+    nodes+=`<g class="qnode ${st?"q-"+st:""}" data-id="${s.id}" tabindex="0" role="button" aria-label="${s.n}" transform="translate(${s.x},${s.y})">
+      ${st==="open"?`<circle r="66" class="qring" style="stroke:${TEAMC[pick]}"/>`:""}
+      <circle r="54" fill="#fff" stroke="rgba(0,0,0,.12)" stroke-width="3"/><circle r="45" fill="${s.col}"/><text y="16" text-anchor="middle" font-size="44">${s.ic}</text>
+      ${st==="done"?qBadgeMini(pick,s):""}${st==="lock"||st==="lockf"?`<text x="34" y="-30" font-size="26">🔒</text>`:""}
+      <rect x="${-w/2}" y="58" width="${w}" height="34" rx="17" fill="#fff" stroke="${s.col}" stroke-width="3"/><text y="82" text-anchor="middle" font-size="20" font-weight="800" fill="#2A1F5C">${s.n}</text>
+      ${doneT.length&&!s.start?`<g transform="translate(${-(doneT.length-1)*9},106)">${doneT.map((t,i)=>`<circle cx="${i*18}" r="8" style="fill:${TEAMC[t]}" stroke="#fff" stroke-width="2"/>`).join("")}</g>`:""}
+      ${here.map((t,i)=>{const a=(-60+i*40)*Math.PI/180;return `<g transform="translate(${Math.round(64*Math.cos(a))},${Math.round(64*Math.sin(a)-10)})"><g class="qtok"><circle r="19" style="fill:${TEAMC[t]}" stroke="#fff" stroke-width="3"/><text y="8" text-anchor="middle" font-size="22">${AV(t)}</text></g></g>`}).join("")}
+    </g>`});
+  return `<svg class="qmapsvg" viewBox="0 0 1000 640" aria-label="技能闖關地圖"><defs><linearGradient id="qgrass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#B8EB94"/><stop offset="1" stop-color="#8ED36E"/></linearGradient></defs>
+    <rect width="1000" height="640" rx="30" fill="url(#qgrass)"/>
+    <ellipse cx="300" cy="120" rx="160" ry="60" fill="#C9F2A9" opacity=".7"/><ellipse cx="760" cy="560" rx="200" ry="60" fill="#C9F2A9" opacity=".7"/>
+    
+    <g opacity=".9"><path d="M560,95 L615,20 L670,95 Z" fill="#8E9BB0"/><path d="M600,40 L615,20 L630,40 L615,48 Z" fill="#fff"/><path d="M630,95 L690,10 L750,95 Z" fill="#7C8AA2"/><path d="M675,32 L690,10 L705,32 L690,40 Z" fill="#fff"/></g>
+    <path d="M-10,300 C120,250 170,350 320,320 S520,250 610,330 S820,420 1010,300" stroke="#6EC6FF" stroke-width="30" fill="none" opacity=".85"/><path d="M-10,300 C120,250 170,350 320,320 S520,250 610,330 S820,420 1010,300" stroke="#B8E4FF" stroke-width="9" fill="none" stroke-dasharray="24 30"/>
+    <ellipse cx="420" cy="560" rx="70" ry="30" fill="#6EC6FF" opacity=".85"/>
+    ${trees}${edges}${nodes}
+    <g transform="translate(30,40)"><circle r="20" fill="#fff" opacity=".85"/><path d="M0,-15 L6,4 L0,0 L-6,4 Z" fill="#E0312B"/><text y="15" text-anchor="middle" font-size="11" font-weight="900" fill="#2A1F5C">N</text></g></svg>`}
+function qBadgeMini(t,s){const d=qT(t).done[s.id];return d?`<g transform="translate(26,-62)">${qBadge(s,d.lv,40).replace("<svg ","<svg x=\"0\" y=\"0\" ")}</g>`:""}
+
+function renderQuest(app){const c=cls();QS();
+  const top=$(`<div class="top"><button class="btn small" id="home">← 回首頁</button><div><p class="eyebrow">Skill Quest</p><h1>${esc(c.name)}・技能闖關地圖</h1></div><div class="spacer"></div><p class="status" id="status"></p><button class="btn small" id="snd">${SND.on?"🔊 音效":"🔇 靜音"}</button><button class="btn small" id="qrank">🏆 頒獎</button><button class="btn small danger" id="qreset">重新開始</button></div>`);
+  top.querySelector("#home").onclick=()=>{view.screen="home";view.qpick=null;render()};
+  top.querySelector("#snd").onclick=()=>{SND.on=!SND.on;try{localStorage.setItem("scout-snd",SND.on?"1":"0")}catch(e){}render()};
+  top.querySelector("#qrank").onclick=()=>qRanking();
+  top.querySelector("#qreset").onclick=()=>askSure(`重新開始「${c.name}」的闖關？`,"所有小隊的徽章和進度都會清空，大富翁的紀錄不受影響。","重新開始",()=>{delete c.quest;view.qpick=null;save();render()});
+  app.append(top);
+  const wrap=$(`<div class="game qgame"></div>`);
+  const mapBox=$(`<div class="qmap">${qMapSvg()}</div>`);
+  if(view.qpick!=null)mapBox.prepend($(`<div class="qpickbar" style="--tc:${TEAMC[view.qpick]}"><span class="av" style="background:${TEAMC[view.qpick]}">${AV(view.qpick)}</span><b>${esc(c.teams[view.qpick])}</b> 要去哪一站？點地圖上發光的站<button class="btn small" id="qcancel">取消</button></div>`));
+  mapBox.querySelectorAll(".qnode").forEach(n=>{const go=()=>qNodeClick(n.dataset.id);n.addEventListener("click",go);n.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();go()}})});
+  const cb=mapBox.querySelector("#qcancel");if(cb)cb.onclick=()=>{view.qpick=null;render()};
+  const side=$(`<div class="side qside"></div>`);
+  c.teams.forEach((tn,t)=>{const T=qT(t),cur=T.cur;
+    const badges=QCH.map(s=>T.done[s.id]?qBadge(s,T.done[s.id].lv,30):qEmpty(s,30)).join("");
+    const left=QCH.some(s=>qState(t,s.id)==="open");
+    const el=$(`<div class="tcard qcard ${view.qpick===t?"cur":""}" style="--tc:${TEAMC[t]}">
+      <div class="trow"><span class="av" style="background:${TEAMC[t]}">${AV(t)}</span><span class="tname">${esc(tn)}</span><span class="qpts">⭐ ${qPts(t)}</span></div>
+      <div class="qbadges">${badges}</div>
+      ${cur?`<div class="qnow"><span>📍 ${QMAP[cur.sid].n}・${esc(qChal(cur).n)} <small>${QLV[cur.lv].star}</small></span><span class="qtime" data-qt="${t}">${qFmt(qElapsed(cur))}</span></div><div class="mact"><button class="btn small primary" data-a="open">打開關卡</button></div>`
+        :`<div class="mact">${left?`<button class="btn small primary" data-a="go">🧭 選下一站</button>`:qCount(t)>=QCH.length?`<span class="qall">🎉 全部完成！</span>`:`<span class="tmeta">再拿 ${QFINALE_NEED-qCount(t)} 枚徽章才能挑戰大營火</span>`}</div>`}</div>`);
+    const go=el.querySelector('[data-a="go"]');if(go)go.onclick=()=>{view.qpick=view.qpick===t?null:t;render()};
+    const op=el.querySelector('[data-a="open"]');if(op)op.onclick=()=>qChallenge(t);
+    side.append(el)});
+  side.append($(`<div class="rules qrules"><b>怎麼玩：</b>各小隊同時闖關。按「選下一站」，在地圖上點發光的站，再選<b>初級（銅）、中級（銀）、高級（金）</b>。完成挑戰由老師按「通過」，就能拿到這一站的徽章，並解鎖相鄰的站。拿到 ${QFINALE_NEED} 枚徽章後可以挑戰<b>大營火</b>。徽章分數：銅 1・銀 2・金 3，同分比總時間。</div>`));
+  wrap.append(mapBox,side);app.append(wrap)}
+
+function qNodeClick(id){const s=QMAP[id],t=view.qpick;
+  if(t!=null){const st=qState(t,id);
+    if(st==="open")return qLevelPick(t,id);
+    if(st==="done")return setStatus(`${cls().teams[t]} 已經拿到${s.n}的徽章了`);
+    if(st==="lockf")return setStatus(`要先拿到 ${QFINALE_NEED} 枚徽章才能挑戰大營火（現在 ${qCount(t)} 枚）`);
+    if(st==="lock")return setStatus(`${s.n}還沒解鎖：先完成旁邊相連的站`);
+    return}
+  qStationInfo(id)}
+function qLevelPick(t,id){const s=QMAP[id],c=cls();
+  modal(m=>{m.classList.add("qlvm");
+    m.append($(`<div class="mtag"><span class="chip" style="background:${s.col};color:#fff">${s.ic} ${s.n}</span><span class="spacer"></span><span class="chip" style="background:${TEAMC[t]};color:#fff">${AV(t)} ${esc(c.teams[t])}</span></div>`),$(`<h2>要挑戰哪一級？</h2>`),$(`<p class="rwhint">${esc(s.d)}・選了就不能換級，失敗可以再試</p>`));
+    const box=$(`<div class="tier qtier"></div>`);
+    [1,2,3].forEach(lv=>{const L=QLV[lv],list=s.ch[lv]||[];
+      const b=$(`<button class="tbtn" data-lv="${lv}" ${list.length?"":"disabled"}>${qBadge(s,lv,72)}<b>${L.n}</b><span class="chipv">${L.tier}徽章・${lv} 分</span><span class="tmeta">${list.map(x=>esc(x.n)).join("、")}</span></button>`);
+      b.onclick=()=>{const T=qT(t);T.cur={sid:id,lv,ci:Math.floor(Math.random()*list.length),acc:0,run:null,tries:0,checks:[]};view.qpick=null;sfx("hint");save();closeModal();render();qChallenge(t)};box.append(b)});
+    m.append(box);const a=$(`<div class="mact"><button class="btn">取消</button></div>`);a.querySelector("button").onclick=()=>closeModal();m.append(a);
+    setTimeout(()=>box.querySelector(".tbtn:not([disabled])").focus(),40)})}
+function qChallenge(t){const c=cls(),T=qT(t),cur=T.cur;if(!cur)return;const s=QMAP[cur.sid],ch=qChal(cur),L=QLV[cur.lv];
+  modal(m=>{m.classList.add("qchm");
+    m.append($(`<div class="mtag"><span class="chip" style="background:${s.col};color:#fff">${s.ic} ${s.n}</span><span class="chip" style="background:${L.col};color:#2A1F5C">${L.star} ${L.n}・${L.tier}徽章</span><span class="spacer"></span><span class="chip" style="background:${TEAMC[t]};color:#fff">${AV(t)} ${esc(c.teams[t])}</span></div>`));
+    m.append($(`<div class="qchead">${qBadge(s,cur.lv,92)}<div><h2 class="qchn">${esc(ch.n)}</h2>${cur.tries?`<p class="tmeta">已經試了 ${cur.tries} 次</p>`:""}</div></div>`),$(`<p class="mq long">${esc(ch.d)}</p>`));
+    if(s.ref)m.append($(s.ref));
+    const std=$(`<div class="qstd"><p class="score-t">通過標準（老師可以一項一項勾）</p>${ch.std.map((x,i)=>`<button class="qck ${cur.checks.includes(i)?"on":""}" data-i="${i}"><span class="box">${cur.checks.includes(i)?"✔":""}</span>${esc(x)}</button>`).join("")}</div>`);m.append(std);
+    std.querySelectorAll(".qck").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,k=cur.checks.indexOf(i);if(k>=0)cur.checks.splice(k,1);else{cur.checks.push(i);sfx("stamp")}b.classList.toggle("on");b.querySelector(".box").textContent=k>=0?"":"✔";save()});
+    const tm=$(`<div class="qtimer"><span class="qtime big" data-qt="${t}" data-lim="${ch.t*1000}">${qFmt(qElapsed(cur))}</span><span class="tmeta">限時 ${qFmt(ch.t*1000)}</span><button class="btn" id="qrun">${cur.run?"⏸ 暫停":"▶ 開始計時"}</button></div>`);m.append(tm);
+    const rb=tm.querySelector("#qrun");rb.onclick=()=>{if(cur.run){cur.acc+=Date.now()-cur.run;cur.run=null;rb.textContent="▶ 繼續"}else{cur.run=Date.now();rb.textContent="⏸ 暫停";sfx("dice")}save();qTick()};
+    const a=$(`<div class="mact qact"><button class="btn" id="qswap">🔀 換一題</button><button class="btn" id="qback">🗺️ 先回地圖</button><span class="spacer"></span><button class="btn danger" id="qfail">❌ 沒過</button><button class="btn primary big" id="qpass">✅ 通過</button></div>`);m.append(a);
+    const others=(s.ch[cur.lv]||[]).length>1;a.querySelector("#qswap").disabled=!others;
+    a.querySelector("#qswap").onclick=()=>{const n=s.ch[cur.lv].length;cur.ci=(cur.ci+1+Math.floor(Math.random()*(n-1)))%n;cur.acc=0;cur.run=null;cur.checks=[];save();qChallenge(t)};
+    a.querySelector("#qback").onclick=()=>{closeModal();render()};
+    a.querySelector("#qfail").onclick=()=>{cur.tries++;cur.acc=0;cur.run=null;cur.checks=[];sfx("wrong");save();
+      modal(m2=>{m2.append($(`<h2>❌ 這次沒過</h2>`),$(`<p class="mq">${esc(c.teams[t])} 可以再試一次，或先去別的站。</p>`));
+        const b=$(`<div class="mact"><button class="btn" id="qleave">換一站</button><button class="btn primary" id="qagain">🔁 再試一次</button></div>`);m2.append(b);
+        b.querySelector("#qleave").onclick=()=>{T.cur=null;save();closeModal();render()};b.querySelector("#qagain").onclick=()=>qChallenge(t);setTimeout(()=>b.querySelector("#qagain").focus(),40)})};
+    a.querySelector("#qpass").onclick=()=>{const ms=qElapsed(cur);T.done[cur.sid]={lv:cur.lv,ms,tries:cur.tries,ts:Date.now(),ch:ch.n};T.cur=null;save();render();qAward(t,cur.sid)};
+    setTimeout(()=>(cur.run?a.querySelector("#qpass"):rb).focus(),40)})}
+function qAward(t,sid){const c=cls(),s=QMAP[sid],d=qT(t).done[sid],L=QLV[d.lv],all=qCount(t)>=QCH.length;sfx("bonus");confetti(all?400:180);
+  modal(m=>{m.classList.add("collectm","qaward");
+    m.append($(`<div class="cteam" style="--tc:${TEAMC[t]}"><span class="av big">${AV(t)}</span><b>${esc(c.teams[t])}</b></div>`),$(`<div class="qbigbadge">${qBadge(s,d.lv,190)}</div>`),
+      $(`<h2 class="ctitle">拿到${s.n}${L.tier}徽章！</h2>`),$(`<p class="csub">${esc(d.ch)}・用時 ${qFmt(d.ms)}${d.tries?`・試了 ${d.tries+1} 次`:"・一次就過"}</p>`),
+      $(`<div class="qbadges big">${QCH.map(x=>qT(t).done[x.id]?qBadge(x,qT(t).done[x.id].lv,46,x.id===sid?"nw":""):qEmpty(x,46)).join("")}</div>`),
+      $(`<p class="csub ${all?"done":""}">${all?"🎉 所有關卡都完成了！":s.finale?"🔥 大營火挑戰成功！":qCount(t)===QFINALE_NEED&&!qT(t).done.finale?`🔥 已經 ${QFINALE_NEED} 枚徽章，大營火解鎖了！`:`⭐ 目前 ${qPts(t)} 分・${qCount(t)} 枚徽章`}</p>`));
+    const a=$(`<div class="mact" style="justify-content:center"><button class="btn primary">回到地圖</button></div>`);a.querySelector("button").onclick=()=>{closeModal();render()};m.append(a);setTimeout(()=>a.querySelector("button").focus(),60)})}
+function qStationInfo(id){const s=QMAP[id],c=cls();
+  modal(m=>{m.append($(`<div class="mtag"><span class="chip" style="background:${s.col};color:#fff">${s.ic} ${s.n}</span></div>`),$(`<h2>${s.ic} ${s.n}</h2>`),$(`<p class="rwhint">${esc(s.d)}</p>`));
+    if(!s.start){const list=$(`<div class="qinfo"></div>`);[1,2,3].forEach(lv=>(s.ch[lv]||[]).forEach(ch=>list.append($(`<div class="qirow"><span class="chip" style="background:${QLV[lv].col}">${QLV[lv].star} ${QLV[lv].n}</span><b>${esc(ch.n)}</b><span class="tmeta">${esc(ch.d)}</span></div>`))));m.append(list);
+      const who=c.teams.map((tn,t)=>{const d=qT(t).done[id];return d?`<span class="qwho">${qBadge(s,d.lv,28)}${esc(tn)}・${qFmt(d.ms)}</span>`:""}).join("");m.append($(`<p class="ex">${who||"還沒有小隊完成這一站。"}</p>`))}
+    if(s.ref)m.append($(s.ref));
+    const a=$(`<div class="mact"><button class="btn primary">關閉</button></div>`);a.querySelector("button").onclick=()=>closeModal();m.append(a);setTimeout(()=>a.querySelector("button").focus(),40)})}
+function qRanking(){const c=cls();const order=c.teams.map((_,t)=>t).sort((a,b)=>qPts(b)-qPts(a)||qGold(b)-qGold(a)||qMs(a)-qMs(b));sfx("bonus");confetti(260);
+  modal(m=>{m.append($(`<p class="eyebrow">Skill Quest Awards</p>`),$(`<h2>🏆 闖關頒獎</h2>`));const r=$(`<div class="rank"></div>`);
+    order.forEach((t,i)=>r.append($(`<div class="rk qrk"><span class="no">${["🥇","🥈","🥉"][i]||i+1}</span><span class="av" style="background:${TEAMC[t]}">${AV(t)}</span><b style="flex:1">${esc(c.teams[t])}</b><span class="qbadges">${QCH.filter(x=>qT(t).done[x.id]).map(x=>qBadge(x,qT(t).done[x.id].lv,30)).join("")}</span><span class="qpts">⭐ ${qPts(t)}</span><span class="tmeta">${qFmt(qMs(t))}</span></div>`)));
+    m.append(r,$(`<p class="tmeta">分數：銅 1・銀 2・金 3。同分時比金徽章數，再比總時間。</p>`));const a=$(`<div class="mact"><button class="btn primary">關閉</button></div>`);a.querySelector("button").onclick=()=>closeModal();m.append(a)})}
+function qTick(){document.querySelectorAll("[data-qt]").forEach(el=>{if(view.screen!=="quest")return;const T=QS().teams[+el.dataset.qt];if(!T||!T.cur)return;const ms=qElapsed(T.cur);el.textContent=qFmt(ms);const lim=+(el.dataset.lim||qChal(T.cur).t*1000);el.classList.toggle("over",ms>lim);el.classList.toggle("running",!!T.cur.run)})}
+setInterval(qTick,250);
 
 // ---------- keyboard / presenter-remote control ----------
 // No overlay: Space / Enter / PageDown / → rolls the die.
