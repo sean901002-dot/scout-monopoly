@@ -474,6 +474,23 @@ p{margin:0}
 .qtime.big{font-size:clamp(44px,6vw,72px);line-height:1}
 .qall{font-weight:800;color:var(--good)}
 .qrules{font-size:14px}
+.qextra{display:flex;gap:8px;align-items:center}
+.qextra .fireb{margin-left:0}
+.qdice{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:linear-gradient(90deg,#FFF4C8,#FFE4F2);border:3px dashed #FFB703;border-radius:18px;padding:10px 14px}
+.qdice:empty{display:none}
+.qdtxt{flex:1;min-width:220px;font-size:clamp(16px,1.8vw,21px);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.qdbig{font-size:40px;animation:popbig .5s cubic-bezier(.2,1.6,.4,1) both}
+.qdroll{font-size:26px;font-weight:900}
+.qdplus{background:var(--accent);color:#fff;border-radius:999px;padding:2px 10px;font-weight:800;font-size:.85em}
+.qdon{font-weight:800;color:var(--good)}
+.qgot{display:flex;flex-direction:column;gap:6px;align-items:center}
+.qgot span{font-size:clamp(17px,2vw,22px);font-weight:800;background:#FFF4C8;border-radius:999px;padding:4px 16px;animation:slotnew .6s ease-out both}
+.qgot b{color:var(--accent)}
+.qflashm{align-items:center;text-align:center;background:radial-gradient(circle at 50% 0%,#E3F2FF,var(--card) 60%)}
+.qflashbtns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.qflashbtns .tchip{font-size:20px;padding:6px 18px 6px 6px}
+.qflashbtns .tchip .av{width:40px;height:40px;font-size:24px}
+.qchest text{animation:tw 1.2s ease-in-out infinite alternate}
 .modal.qchm{max-width:900px}
 .qchead{display:flex;align-items:center;gap:18px}
 .qchn{font-size:clamp(30px,4vw,48px)}
@@ -2982,9 +2999,31 @@ const QFINALE_NEED=5;
 // ---------- 技能闖關地圖：畫面與流程 ----------
 const QMAP=Object.fromEntries(QSTATIONS.map(s=>[s.id,s]));
 const QCH=QSTATIONS.filter(s=>!s.start);
-function QS(){const c=cls();if(!c.quest)c.quest={v:1,teams:[]};const q=c.quest;while(q.teams.length<c.teams.length)q.teams.push({done:{},cur:null});return q}
+function QS(){const c=cls();if(!c.quest)c.quest={v:1,teams:[]};const q=c.quest;while(q.teams.length<c.teams.length)q.teams.push({done:{},cur:null});
+  if(!q.chest){const pool=QCH.filter(x=>!x.finale);q.chest=pool[Math.floor(Math.random()*pool.length)].id}q.rec=q.rec||{};q.first=q.first||{};q.passes=q.passes||0;
+  q.teams.forEach(T=>{T.bonus=T.bonus||[];T.streak=T.streak||0});return q}
+const QMODS=[
+ {k:"quiet",ic:"🤐",n:"安靜模式",d:"全程不能說話，只能比手勢！",b:1},
+ {k:"hand",ic:"✋",n:"非慣用手",d:"動手的人只能用非慣用手。",b:1},
+ {k:"blind",ic:"🙈",n:"蒙眼操作",d:"動手的人閉上眼睛，隊友用說的指揮。",b:2},
+ {k:"young",ic:"👶",n:"最小號上場",d:"由座號最小的隊員負責完成，其他人不能碰。",b:1},
+ {k:"fast",ic:"⏩",n:"極速挑戰",d:"限時縮短成原本的三分之二！",b:1},
+ {k:"talk",ic:"🎤",n:"現場解說員",d:"動手的人要邊做邊大聲解說每一步。",b:1},
+ {k:"slow",ic:"🐢",n:"慢動作",d:"所有動作都要用慢動作完成，像在拍電影。",b:1},
+ {k:"angel",ic:"😇",n:"天使卡",d:"可以問老師一次提示，沒有附加條件。",b:0}];
+const QFLASH=[
+ "全隊用身體排出一個「平結」的形狀，最像的小隊得分！",
+ "不能說話！全隊依照生日月份排成一列，最快排對的小隊得分！",
+ "最快全隊拿出一條繩子並高高舉起的小隊得分！",
+ "全隊一起喊出童軍銘言「準備」，最整齊響亮的小隊得分！",
+ "全隊做出一個「人體指北針」，指向北方最準的小隊得分！",
+ "一分鐘內打出最多個平結的小隊得分！",
+ "全隊用身體排出一個帳篷，最穩的小隊得分！",
+ "最快全隊蹲下、手搭肩，排成一條「毛毛蟲」的小隊得分！"];
+function qBonus(t){return (qT(t).bonus||[]).reduce((a,b)=>a+b.p,0)}
+function qLim(cur){return qChal(cur).t*1000*(cur.mod&&cur.mod.on&&cur.mod.k==="fast"?2/3:1)}
 function qT(t){return QS().teams[t]}
-function qPts(t){return Object.values(qT(t).done).reduce((a,d)=>a+d.lv,0)}
+function qPts(t){return Object.values(qT(t).done).reduce((a,d)=>a+d.lv,0)+qBonus(t)}
 function qCount(t){return Object.keys(qT(t).done).length}
 function qGold(t){return Object.values(qT(t).done).filter(d=>d.lv===3).length}
 function qMs(t){return Object.values(qT(t).done).reduce((a,d)=>a+(d.ms||0),0)}
@@ -3009,7 +3048,7 @@ function qMapSvg(){const c=cls(),pick=view.qpick;
       ${st==="open"?`<circle r="66" class="qring" style="stroke:${TEAMC[pick]}"/>`:""}
       <circle r="54" fill="#fff" stroke="rgba(0,0,0,.12)" stroke-width="3"/><circle r="45" fill="${s.col}"/><text y="16" text-anchor="middle" font-size="44">${s.ic}</text>
       ${st==="done"?qBadgeMini(pick,s):""}${st==="lock"||st==="lockf"?`<text x="34" y="-30" font-size="26">🔒</text>`:""}
-      <rect x="${-w/2}" y="58" width="${w}" height="34" rx="17" fill="#fff" stroke="${s.col}" stroke-width="3"/><text y="82" text-anchor="middle" font-size="20" font-weight="800" fill="#2A1F5C">${s.n}</text>
+      ${QS().first[s.id]!=null?`<g transform="translate(${w/2+4},60)"><circle r="15" style="fill:${TEAMC[QS().first[s.id]]}" stroke="#FFC94D" stroke-width="3"/><text y="6" text-anchor="middle" font-size="16">${AV(QS().first[s.id])}</text><text y="-12" text-anchor="middle" font-size="16">👑</text></g>`:""}${QS().chestBy!=null&&QS().chest===s.id?`<text x="-58" y="-34" font-size="30">🎁</text>`:""}<rect x="${-w/2}" y="58" width="${w}" height="34" rx="17" fill="#fff" stroke="${s.col}" stroke-width="3"/><text y="82" text-anchor="middle" font-size="20" font-weight="800" fill="#2A1F5C">${s.n}</text>
       ${doneT.length&&!s.start?`<g transform="translate(${-(doneT.length-1)*9},106)">${doneT.map((t,i)=>`<circle cx="${i*18}" r="8" style="fill:${TEAMC[t]}" stroke="#fff" stroke-width="2"/>`).join("")}</g>`:""}
       ${here.map((t,i)=>{const a=(-60+i*40)*Math.PI/180;return `<g transform="translate(${Math.round(64*Math.cos(a))},${Math.round(64*Math.sin(a)-10)})"><g class="qtok"><circle r="19" style="fill:${TEAMC[t]}" stroke="#fff" stroke-width="3"/><text y="8" text-anchor="middle" font-size="22">${AV(t)}</text></g></g>`}).join("")}
     </g>`});
@@ -3021,7 +3060,7 @@ function qMapSvg(){const c=cls(),pick=view.qpick;
     <path d="M-10,300 C120,250 170,350 320,320 S520,250 610,330 S820,420 1010,300" stroke="#6EC6FF" stroke-width="30" fill="none" opacity=".85"/><path d="M-10,300 C120,250 170,350 320,320 S520,250 610,330 S820,420 1010,300" stroke="#B8E4FF" stroke-width="9" fill="none" stroke-dasharray="24 30"/>
     <ellipse cx="420" cy="560" rx="70" ry="30" fill="#6EC6FF" opacity=".85"/>
     ${trees}${edges}${nodes}
-    <g transform="translate(30,40)"><circle r="20" fill="#fff" opacity=".85"/><path d="M0,-15 L6,4 L0,0 L-6,4 Z" fill="#E0312B"/><text y="15" text-anchor="middle" font-size="11" font-weight="900" fill="#2A1F5C">N</text></g></svg>`}
+    ${QS().chestBy==null?`<g class="qchest" transform="translate(500,600)"><rect x="-120" y="-20" width="240" height="34" rx="17" fill="#fff" opacity=".9"/><text y="4" text-anchor="middle" font-size="17" font-weight="800" fill="#7a4b00">🎁 有一站藏著寶箱，第一個通過的小隊 +2！</text></g>`:""}<g transform="translate(30,40)"><circle r="20" fill="#fff" opacity=".85"/><path d="M0,-15 L6,4 L0,0 L-6,4 Z" fill="#E0312B"/><text y="15" text-anchor="middle" font-size="11" font-weight="900" fill="#2A1F5C">N</text></g></svg>`}
 function qBadgeMini(t,s){const d=qT(t).done[s.id];return d?`<g transform="translate(26,-62)">${qBadge(s,d.lv,40).replace("<svg ","<svg x=\"0\" y=\"0\" ")}</g>`:""}
 
 function renderQuest(app){const c=cls();QS();
@@ -3042,13 +3081,13 @@ function renderQuest(app){const c=cls();QS();
     const left=QCH.some(s=>qState(t,s.id)==="open");
     const el=$(`<div class="tcard qcard ${view.qpick===t?"cur":""}" style="--tc:${TEAMC[t]}">
       <div class="trow"><span class="av" style="background:${TEAMC[t]}">${AV(t)}</span><span class="tname">${esc(tn)}</span><span class="qpts">⭐ ${qPts(t)}</span></div>
-      <div class="qbadges">${badges}</div>
+      <div class="qbadges">${badges}</div>${T.streak>=2||qBonus(t)?`<div class="qextra">${T.streak>=2?`<span class="fireb">🔥 連過 ${T.streak}</span>`:""}${qBonus(t)?`<span class="tmeta">加分 +${qBonus(t)}</span>`:""}</div>`:""}
       ${cur?`<div class="qnow"><span>📍 ${QMAP[cur.sid].n}・${esc(qChal(cur).n)} <small>${QLV[cur.lv].star}</small></span><span class="qtime" data-qt="${t}">${qFmt(qElapsed(cur))}</span></div><div class="mact"><button class="btn small primary" data-a="open">打開關卡</button></div>`
         :`<div class="mact">${left?`<button class="btn small primary" data-a="go">🧭 選下一站</button>`:qCount(t)>=QCH.length?`<span class="qall">🎉 全部完成！</span>`:`<span class="tmeta">再拿 ${QFINALE_NEED-qCount(t)} 枚徽章才能挑戰大營火</span>`}</div>`}</div>`);
     const go=el.querySelector('[data-a="go"]');if(go)go.onclick=()=>{view.qpick=view.qpick===t?null:t;render()};
     const op=el.querySelector('[data-a="open"]');if(op)op.onclick=()=>qChallenge(t);
     side.append(el)});
-  side.append($(`<div class="rules qrules"><b>怎麼玩：</b>各小隊同時闖關。按「選下一站」，在地圖上點發光的站，再選<b>初級（銅）、中級（銀）、高級（金）</b>。完成挑戰由老師按「通過」，就能拿到這一站的徽章，並解鎖相鄰的站。拿到 ${QFINALE_NEED} 枚徽章後可以挑戰<b>大營火</b>。徽章分數：銅 1・銀 2・金 3，同分比總時間。</div>`));
+  side.append($(`<div class="rules qrules"><b>怎麼玩：</b>各小隊同時闖關。按「選下一站」，在地圖上點發光的站，再選<b>初級（銅）、中級（銀）、高級（金）</b>。完成挑戰由老師按「通過」，就能拿到這一站的徽章，並解鎖相鄰的站。拿到 ${QFINALE_NEED} 枚徽章後可以挑戰<b>大營火</b>。徽章分數：銅 1・銀 2・金 3。<b>加分：</b>👑 首位通關 +1、⚡ 破紀錄 +1、🎲 挑戰骰 +1～2、🔥 連過 3 關 +1、🎁 寶箱 +2、⚡ 快閃挑戰 +1。同分比總時間。</div>`));
   wrap.append(mapBox,side);app.append(wrap)}
 
 function qNodeClick(id){const s=QMAP[id],t=view.qpick;
@@ -3075,25 +3114,49 @@ function qChallenge(t){const c=cls(),T=qT(t),cur=T.cur;if(!cur)return;const s=QM
     if(s.ref)m.append($(s.ref));
     const std=$(`<div class="qstd"><p class="score-t">通過標準（老師可以一項一項勾）</p>${ch.std.map((x,i)=>`<button class="qck ${cur.checks.includes(i)?"on":""}" data-i="${i}"><span class="box">${cur.checks.includes(i)?"✔":""}</span>${esc(x)}</button>`).join("")}</div>`);m.append(std);
     std.querySelectorAll(".qck").forEach(b=>b.onclick=()=>{const i=+b.dataset.i,k=cur.checks.indexOf(i);if(k>=0)cur.checks.splice(k,1);else{cur.checks.push(i);sfx("stamp")}b.classList.toggle("on");b.querySelector(".box").textContent=k>=0?"":"✔";save()});
-    const tm=$(`<div class="qtimer"><span class="qtime big" data-qt="${t}" data-lim="${ch.t*1000}">${qFmt(qElapsed(cur))}</span><span class="tmeta">限時 ${qFmt(ch.t*1000)}</span><button class="btn" id="qrun">${cur.run?"⏸ 暫停":"▶ 開始計時"}</button></div>`);m.append(tm);
-    const rb=tm.querySelector("#qrun");rb.onclick=()=>{if(cur.run){cur.acc+=Date.now()-cur.run;cur.run=null;rb.textContent="▶ 繼續"}else{cur.run=Date.now();rb.textContent="⏸ 暫停";sfx("dice")}save();qTick()};
+    const dice=$(`<div class="qdice"></div>`);m.append(dice);
+    const drawDice=()=>{const md=cur.mod;dice.innerHTML="";
+      if(!md){if(cur.acc||cur.run)return;dice.innerHTML=`<span class="qdtxt">🎲 想要加分嗎？擲<b>挑戰骰</b>，接受條件、通過就多拿分數！</span><button class="btn" id="qroll">🎲 擲挑戰骰</button>`;
+        dice.querySelector("#qroll").onclick=()=>{const b=dice.querySelector("#qroll");b.disabled=true;let k=0;const pick=QMODS[Math.floor(Math.random()*QMODS.length)];
+          const iv=setInterval(()=>{const r=QMODS[k++%QMODS.length];dice.querySelector(".qdtxt").innerHTML=`<span class="qdroll">${r.ic} ${r.n}</span>`;sfx("dice");if(k>14){clearInterval(iv);cur.mod={k:pick.k,on:false};save();sfx("hint");drawDice()}},90)};return}
+      const M=QMODS.find(x=>x.k===md.k);
+      dice.innerHTML=`<span class="qdtxt"><span class="qdbig">${M.ic}</span><b>${M.n}</b>：${M.d}${M.b?` <span class="qdplus">通過 +${M.b} 分</span>`:""}</span>${md.on?`<span class="qdon">✅ 已接受</span>`:md.no?`<span class="tmeta">沒有接受</span>`:`<button class="btn" id="qno">不要</button><button class="btn primary" id="qyes">接受！</button>`}`;
+      const y=dice.querySelector("#qyes");if(y)y.onclick=()=>{md.on=true;save();sfx("bonus");drawDice();tm.querySelector(".qtime").dataset.lim=qLim(cur);tm.querySelector(".qlim").textContent=`限時 ${qFmt(qLim(cur))}`};
+      const n=dice.querySelector("#qno");if(n)n.onclick=()=>{md.no=true;save();drawDice()}};
+    drawDice();
+    const tm=$(`<div class="qtimer"><span class="qtime big" data-qt="${t}" data-lim="${qLim(cur)}">${qFmt(qElapsed(cur))}</span><span class="tmeta qlim">限時 ${qFmt(qLim(cur))}</span><button class="btn" id="qrun">${cur.run?"⏸ 暫停":"▶ 開始計時"}</button></div>`);m.append(tm);
+    const rb=tm.querySelector("#qrun");rb.onclick=()=>{if(!cur.run&&!cur.acc&&cur.mod&&!cur.mod.on&&!cur.mod.no){cur.mod.no=true;drawDice()}if(!cur.mod&&!cur.acc&&!cur.run)dice.innerHTML="";if(cur.run){cur.acc+=Date.now()-cur.run;cur.run=null;rb.textContent="▶ 繼續"}else{cur.run=Date.now();rb.textContent="⏸ 暫停";sfx("dice")}save();qTick()};
     const a=$(`<div class="mact qact"><button class="btn" id="qswap">🔀 換一題</button><button class="btn" id="qback">🗺️ 先回地圖</button><span class="spacer"></span><button class="btn danger" id="qfail">❌ 沒過</button><button class="btn primary big" id="qpass">✅ 通過</button></div>`);m.append(a);
     const others=(s.ch[cur.lv]||[]).length>1;a.querySelector("#qswap").disabled=!others;
-    a.querySelector("#qswap").onclick=()=>{const n=s.ch[cur.lv].length;cur.ci=(cur.ci+1+Math.floor(Math.random()*(n-1)))%n;cur.acc=0;cur.run=null;cur.checks=[];save();qChallenge(t)};
+    a.querySelector("#qswap").onclick=()=>{const n=s.ch[cur.lv].length;cur.ci=(cur.ci+1+Math.floor(Math.random()*(n-1)))%n;cur.acc=0;cur.run=null;cur.checks=[];cur.mod=null;save();qChallenge(t)};
     a.querySelector("#qback").onclick=()=>{closeModal();render()};
-    a.querySelector("#qfail").onclick=()=>{cur.tries++;cur.acc=0;cur.run=null;cur.checks=[];sfx("wrong");save();
+    a.querySelector("#qfail").onclick=()=>{cur.tries++;cur.acc=0;cur.run=null;cur.checks=[];T.streak=0;sfx("wrong");save();
       modal(m2=>{m2.append($(`<h2>❌ 這次沒過</h2>`),$(`<p class="mq">${esc(c.teams[t])} 可以再試一次，或先去別的站。</p>`));
         const b=$(`<div class="mact"><button class="btn" id="qleave">換一站</button><button class="btn primary" id="qagain">🔁 再試一次</button></div>`);m2.append(b);
         b.querySelector("#qleave").onclick=()=>{T.cur=null;save();closeModal();render()};b.querySelector("#qagain").onclick=()=>qChallenge(t);setTimeout(()=>b.querySelector("#qagain").focus(),40)})};
-    a.querySelector("#qpass").onclick=()=>{const ms=qElapsed(cur);T.done[cur.sid]={lv:cur.lv,ms,tries:cur.tries,ts:Date.now(),ch:ch.n};T.cur=null;save();render();qAward(t,cur.sid)};
+    a.querySelector("#qpass").onclick=()=>{const ms=qElapsed(cur),q=QS(),got=[];T.done[cur.sid]={lv:cur.lv,ms,tries:cur.tries,ts:Date.now(),ch:ch.n};T.cur=null;
+      const give=(p,why)=>{T.bonus.push({p,why});got.push([p,why])};
+      if(q.first[cur.sid]==null){q.first[cur.sid]=t;give(1,`👑 首位通關${s.n}`)}
+      const rk=cur.sid+"-"+cur.lv,old=q.rec[rk];if(ms>0&&(!old||ms<old.ms)){if(old)give(1,`⚡ 打破${L.n}紀錄（原本 ${qFmt(old.ms)}）`);q.rec[rk]={ms,t}}
+      if(cur.mod&&cur.mod.on){const M=QMODS.find(x=>x.k===cur.mod.k);if(M.b)give(M.b,`${M.ic} 挑戰骰「${M.n}」`)}
+      T.streak=(T.streak||0)+1;if(T.streak%3===0)give(1,`🔥 連續通過 ${T.streak} 關`);
+      if(q.chestBy==null&&q.chest===cur.sid){q.chestBy=t;give(2,"🎁 找到藏在這一站的寶箱")}
+      q.passes++;save();render();qAward(t,cur.sid,got)};
     setTimeout(()=>(cur.run?a.querySelector("#qpass"):rb).focus(),40)})}
-function qAward(t,sid){const c=cls(),s=QMAP[sid],d=qT(t).done[sid],L=QLV[d.lv],all=qCount(t)>=QCH.length;sfx("bonus");confetti(all?400:180);
+function qAward(t,sid,got=[]){const c=cls(),s=QMAP[sid],d=qT(t).done[sid],L=QLV[d.lv],all=qCount(t)>=QCH.length;sfx("bonus");confetti(all?400:180);
   modal(m=>{m.classList.add("collectm","qaward");
     m.append($(`<div class="cteam" style="--tc:${TEAMC[t]}"><span class="av big">${AV(t)}</span><b>${esc(c.teams[t])}</b></div>`),$(`<div class="qbigbadge">${qBadge(s,d.lv,190)}</div>`),
       $(`<h2 class="ctitle">拿到${s.n}${L.tier}徽章！</h2>`),$(`<p class="csub">${esc(d.ch)}・用時 ${qFmt(d.ms)}${d.tries?`・試了 ${d.tries+1} 次`:"・一次就過"}</p>`),
       $(`<div class="qbadges big">${QCH.map(x=>qT(t).done[x.id]?qBadge(x,qT(t).done[x.id].lv,46,x.id===sid?"nw":""):qEmpty(x,46)).join("")}</div>`),
       $(`<p class="csub ${all?"done":""}">${all?"🎉 所有關卡都完成了！":s.finale?"🔥 大營火挑戰成功！":qCount(t)===QFINALE_NEED&&!qT(t).done.finale?`🔥 已經 ${QFINALE_NEED} 枚徽章，大營火解鎖了！`:`⭐ 目前 ${qPts(t)} 分・${qCount(t)} 枚徽章`}</p>`));
-    const a=$(`<div class="mact" style="justify-content:center"><button class="btn primary">回到地圖</button></div>`);a.querySelector("button").onclick=()=>{closeModal();render()};m.append(a);setTimeout(()=>a.querySelector("button").focus(),60)})}
+    if(got.length)m.append($(`<div class="qgot">${got.map(([p,w],i)=>`<span style="animation-delay:${.8+i*.35}s">${esc(w)} <b>+${p}</b></span>`).join("")}</div>`));
+    const flash=QS().passes%4===0;
+    const a=$(`<div class="mact" style="justify-content:center"><button class="btn primary">${flash?"⚡ 等一下！":"回到地圖"}</button></div>`);a.querySelector("button").onclick=()=>{closeModal();render();if(flash)qFlash()};m.append(a);setTimeout(()=>a.querySelector("button").focus(),60)})}
+function qFlash(){const c=cls(),ev=QFLASH[Math.floor(Math.random()*QFLASH.length)];sfx("hint");
+  modal(m=>{m.classList.add("qflashm");m.append($(`<p class="eyebrow">Flash Challenge</p>`),$(`<h2 class="disname">⚡ 全班快閃挑戰！</h2>`),$(`<p class="mq long">${esc(ev)}</p>`),$(`<p class="rwhint">所有小隊一起來！老師按下贏的小隊，加 1 分</p>`));
+    const box=$(`<div class="qflashbtns"></div>`);c.teams.forEach((tn,t)=>{const b=$(`<button class="tchip" style="--tc:${TEAMC[t]}"><span class="av" style="background:${TEAMC[t]}">${AV(t)}</span>${esc(tn)}</button>`);
+      b.onclick=()=>{qT(t).bonus.push({p:1,why:"⚡ 快閃挑戰獲勝"});save();sfx("bonus");confetti(160);closeModal();render();setStatus(`⚡ ${tn} 贏了快閃挑戰，+1 分！`)};box.append(b)});
+    m.append(box);const a=$(`<div class="mact"><button class="btn">跳過</button></div>`);a.querySelector("button").onclick=()=>{closeModal();render()};m.append(a)})}
 function qStationInfo(id){const s=QMAP[id],c=cls();
   modal(m=>{m.append($(`<div class="mtag"><span class="chip" style="background:${s.col};color:#fff">${s.ic} ${s.n}</span></div>`),$(`<h2>${s.ic} ${s.n}</h2>`),$(`<p class="rwhint">${esc(s.d)}</p>`));
     if(!s.start){const list=$(`<div class="qinfo"></div>`);[1,2,3].forEach(lv=>(s.ch[lv]||[]).forEach(ch=>list.append($(`<div class="qirow"><span class="chip" style="background:${QLV[lv].col}">${QLV[lv].star} ${QLV[lv].n}</span><b>${esc(ch.n)}</b><span class="tmeta">${esc(ch.d)}</span></div>`))));m.append(list);
@@ -3102,9 +3165,9 @@ function qStationInfo(id){const s=QMAP[id],c=cls();
     const a=$(`<div class="mact"><button class="btn primary">關閉</button></div>`);a.querySelector("button").onclick=()=>closeModal();m.append(a);setTimeout(()=>a.querySelector("button").focus(),40)})}
 function qRanking(){const c=cls();const order=c.teams.map((_,t)=>t).sort((a,b)=>qPts(b)-qPts(a)||qGold(b)-qGold(a)||qMs(a)-qMs(b));sfx("bonus");confetti(260);
   modal(m=>{m.append($(`<p class="eyebrow">Skill Quest Awards</p>`),$(`<h2>🏆 闖關頒獎</h2>`));const r=$(`<div class="rank"></div>`);
-    order.forEach((t,i)=>r.append($(`<div class="rk qrk"><span class="no">${["🥇","🥈","🥉"][i]||i+1}</span><span class="av" style="background:${TEAMC[t]}">${AV(t)}</span><b style="flex:1">${esc(c.teams[t])}</b><span class="qbadges">${QCH.filter(x=>qT(t).done[x.id]).map(x=>qBadge(x,qT(t).done[x.id].lv,30)).join("")}</span><span class="qpts">⭐ ${qPts(t)}</span><span class="tmeta">${qFmt(qMs(t))}</span></div>`)));
-    m.append(r,$(`<p class="tmeta">分數：銅 1・銀 2・金 3。同分時比金徽章數，再比總時間。</p>`));const a=$(`<div class="mact"><button class="btn primary">關閉</button></div>`);a.querySelector("button").onclick=()=>closeModal();m.append(a)})}
-function qTick(){document.querySelectorAll("[data-qt]").forEach(el=>{if(view.screen!=="quest")return;const T=QS().teams[+el.dataset.qt];if(!T||!T.cur)return;const ms=qElapsed(T.cur);el.textContent=qFmt(ms);const lim=+(el.dataset.lim||qChal(T.cur).t*1000);el.classList.toggle("over",ms>lim);el.classList.toggle("running",!!T.cur.run)})}
+    order.forEach((t,i)=>r.append($(`<div class="rk qrk"><span class="no">${["🥇","🥈","🥉"][i]||i+1}</span><span class="av" style="background:${TEAMC[t]}">${AV(t)}</span><b style="flex:1">${esc(c.teams[t])}</b><span class="qbadges">${QCH.filter(x=>qT(t).done[x.id]).map(x=>qBadge(x,qT(t).done[x.id].lv,30)).join("")}</span><span class="qpts">⭐ ${qPts(t)}</span><span class="tmeta">${qBonus(t)?`含加分 ${qBonus(t)}・`:""}${qFmt(qMs(t))}</span></div>`)));
+    m.append(r,$(`<p class="tmeta">分數：銅 1・銀 2・金 3，加上首位通關、破紀錄、挑戰骰、連過、寶箱、快閃挑戰的加分。同分時比金徽章數，再比總時間。</p>`));const a=$(`<div class="mact"><button class="btn primary">關閉</button></div>`);a.querySelector("button").onclick=()=>closeModal();m.append(a)})}
+function qTick(){document.querySelectorAll("[data-qt]").forEach(el=>{if(view.screen!=="quest")return;const T=QS().teams[+el.dataset.qt];if(!T||!T.cur)return;const ms=qElapsed(T.cur);el.textContent=qFmt(ms);const lim=+(el.dataset.lim||qLim(T.cur));el.classList.toggle("over",ms>lim);el.classList.toggle("running",!!T.cur.run)})}
 setInterval(qTick,250);
 
 // ---------- keyboard / presenter-remote control ----------
