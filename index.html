@@ -464,7 +464,7 @@ p{margin:0}
 .qside{gap:10px}
 .qcard{gap:8px}
 .qpts{font-weight:900;font-size:20px}
-.qbadges{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.qbadges{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
 .qbadges.big{justify-content:center;gap:8px}
 .qbadge.nw{animation:slotnew .9s ease-out .4s both}
 .qnow{display:flex;align-items:center;gap:8px;justify-content:space-between;font-weight:700;font-size:15px;background:#fff;border-radius:12px;padding:6px 10px}
@@ -2987,12 +2987,21 @@ const QSTATIONS=[
      {n:"金氏遊戲",d:"老師拿出 10 樣小東西給大家看 30 秒，蓋起來後小隊寫下所有記得的東西。",std:["寫對至少 8 樣"],t:90}],
   2:[{n:"擺記號",d:"用樹枝、石頭或筆在地上（或桌上）擺出「往這條路」「不是這條路」「終點」三個記號。",std:["三個記號都正確","別的小隊看得懂"],t:90}],
   3:[{n:"循跡尋寶",d:"老師（或另一隊）先在教室裡擺好追蹤記號並藏一樣東西，小隊照記號找出來。",std:["照記號走，不亂找","找到藏起來的東西","在時間內完成"],t:240}]}},
+ {id:"travel",n:"旅行與風險企劃",ic:"🎒",col:"#00A6A6",x:480,y:512,d:"行程、預算、裝備、風險評估與應變",ch:{
+  1:[{n:"一日健行背包",d:"小隊要去一日健行，全隊列出背包裡一定要帶的東西。",std:["至少寫出 10 樣","有水和食物、雨具、保暖衣物、照明（頭燈或手電筒）","有急救包、地圖或指北針、哨子"],t:90},
+     {n:"找出風險",d:"情境：七月的下午，小隊到溪邊烤肉。天空開始變黑，上游的山區在下雨，有隊員穿拖鞋，大家都沒帶防曬和雨衣。找出這個活動的風險。",std:["找出至少 3 個風險","每個風險說得出可能會發生什麼事","說得出一個馬上可以做的改善"],t:90}],
+  2:[{n:"行程時間表",d:"規劃小隊從學校出發、到附近一個景點的一日行程（例如陽明山擎天崗），寫出時間表。",std:["寫出交通方式和轉乘","有出發、抵達、活動、午餐、回程的時間","預留至少 30 分鐘緩衝時間","寫出集合時間和集合地點"],t:240},
+     {n:"小隊預算表",d:"幫小隊算出這趟一日遊的預算，並算出每人要付多少。",std:["有交通、餐費、門票、雜支","加上約一成的預備金","總額和每人分攤都算對"],t:240},
+     {n:"風險管理四招",d:"說出風險管理的四種方法，每一種舉一個戶外活動的例子。",std:["迴避：不做這個活動（例如颱風天取消）","降低：做好預防（例如穿登山鞋、帶雨衣）","轉移：讓別人分擔（例如保險）","接受：風險很小，準備好就去做"],t:120}],
+  3:[{n:"一頁企劃書",d:"小隊寫出一份一日活動的一頁企劃書。",std:["目的地、活動目的、行程表","裝備清單和預算","至少 3 個風險，每個都有預防方法和應變方法","雨天備案和緊急聯絡方式（119、帶隊老師、家長）"],t:480},
+     {n:"突發狀況應變",d:"老師從這四個狀況選一個：隊員走失、午後雷陣雨、有人中暑、錯過末班車。小隊討論 2 分鐘後上台報告怎麼處理。",std:["先確保所有人的安全","有分工：誰照顧、誰聯絡、誰找資源","說得出聯絡對象和方法（119、帶隊老師；手機沒訊號可以撥 112）","有後續處理，例如回報、檢討"],t:240},
+     {n:"風險評估表",d:"幫一次露營活動做風險評估：列出 4 個風險，用「發生機率 × 嚴重程度」（高、中、低）評分，排出最優先處理的風險。",std:["列出 4 個不同的風險","每個都有機率和嚴重程度的評分","排出優先順序，最高的有預防和應變方法"],t:300}]}},
  {id:"finale",n:"大營火",ic:"🔥",col:"#E8175D",x:930,y:550,finale:true,d:"拿到 5 枚徽章才能挑戰！",ch:{
   1:[{n:"隊呼＋規律",d:"全隊喊出小隊隊呼，再一起說出童軍規律中的三條。",std:["隊呼整齊響亮","三條規律都正確"],t:60}],
   2:[{n:"繩結接力",d:"全隊每人輪流打一個不同的結（平結、八字結、雙套結、稱人結……），一個人打完下一個人才能開始。",std:["每個人的結都正確","每個結都不同","在時間內完成"],t:120}],
   3:[{n:"蒙眼稱人結",d:"一位隊員蒙住眼睛，只靠隊友口頭指導打出稱人結（隊友不能碰繩子）。",std:["隊友只用說的","結型正確，繩圈不會縮小","在時間內完成"],t:180}]}}
 ];
-const QEDGES=[["base","knot1"],["base","aid"],["knot1","aid"],["knot1","knot2"],["aid","compass"],["compass","knot2"],["compass","fire"],["knot2","camp"],["knot2","fire"],["fire","signal"],["fire","track"],["camp","track"],["signal","track"],["track","finale"],["camp","finale"]];
+const QEDGES=[["base","knot1"],["base","aid"],["knot1","aid"],["knot1","knot2"],["aid","compass"],["compass","knot2"],["compass","fire"],["knot2","camp"],["knot2","fire"],["fire","signal"],["fire","track"],["camp","track"],["signal","track"],["track","finale"],["camp","finale"],["knot1","travel"],["travel","camp"],["knot2","travel"]];
 const QLV={1:{n:"初級",star:"★",tier:"銅",col:"#CD7F32"},2:{n:"中級",star:"★★",tier:"銀",col:"#A7B4C2"},3:{n:"高級",star:"★★★",tier:"金",col:"#FFC94D"}};
 const QFINALE_NEED=5;
 
@@ -3041,7 +3050,7 @@ function qMapSvg(){const c=cls(),pick=view.qpick;
   const node=id=>QMAP[id];
   let edges="";QEDGES.forEach(([a,b])=>{const A=node(a),B=node(b),mx=(A.x+B.x)/2,my=(A.y+B.y)/2,dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy),ox=-dy/L*26,oy=dx/L*26;const d=`M${A.x},${A.y} Q${mx+ox},${my+oy} ${B.x},${B.y}`;
     edges+=`<path d="${d}" stroke="#F3E3B8" stroke-width="18" fill="none" stroke-linecap="round"/><path d="${d}" stroke="#C79A5B" stroke-width="4" fill="none" stroke-dasharray="2 12" stroke-linecap="round"/>`});
-  const trees=[[60,90],[110,60],[160,110],[620,70],[670,110],[330,560],[380,590],[560,590],[800,600],[980,220],[960,40],[40,330],[30,420],[600,200],[360,250],[820,500]].map(([x,y],i)=>`<g transform="translate(${x},${y}) scale(${.8+(i%3)*.15})"><rect x="-4" y="10" width="8" height="14" fill="#7A4E2A"/><path d="M0,-26 L20,12 L-20,12 Z" fill="${i%2?"#2E9E5B":"#3DB36B"}"/><path d="M0,-38 L15,-6 L-15,-6 Z" fill="${i%2?"#3DB36B":"#4CC77A"}"/></g>`).join("");
+  const trees=[[60,90],[110,60],[160,110],[620,70],[670,110],[330,580],[300,615],[655,615],[800,600],[980,220],[960,40],[40,330],[30,420],[600,200],[360,250],[820,500]].map(([x,y],i)=>`<g transform="translate(${x},${y}) scale(${.8+(i%3)*.15})"><rect x="-4" y="10" width="8" height="14" fill="#7A4E2A"/><path d="M0,-26 L20,12 L-20,12 Z" fill="${i%2?"#2E9E5B":"#3DB36B"}"/><path d="M0,-38 L15,-6 L-15,-6 Z" fill="${i%2?"#3DB36B":"#4CC77A"}"/></g>`).join("");
   let nodes="";QSTATIONS.forEach(s=>{const here=c.teams.map((_,t)=>t).filter(t=>qT(t).cur&&qT(t).cur.sid===s.id);const doneT=c.teams.map((_,t)=>t).filter(t=>qT(t).done[s.id]);
     const st=pick!=null?qState(pick,s.id):"";const w=s.n.length*24+28;
     nodes+=`<g class="qnode ${st?"q-"+st:""}" data-id="${s.id}" tabindex="0" role="button" aria-label="${s.n}" transform="translate(${s.x},${s.y})">
@@ -3058,9 +3067,9 @@ function qMapSvg(){const c=cls(),pick=view.qpick;
     
     <g opacity=".9"><path d="M560,95 L615,20 L670,95 Z" fill="#8E9BB0"/><path d="M600,40 L615,20 L630,40 L615,48 Z" fill="#fff"/><path d="M630,95 L690,10 L750,95 Z" fill="#7C8AA2"/><path d="M675,32 L690,10 L705,32 L690,40 Z" fill="#fff"/></g>
     <path d="M-10,300 C120,250 170,350 320,320 S520,250 610,330 S820,420 1010,300" stroke="#6EC6FF" stroke-width="30" fill="none" opacity=".85"/><path d="M-10,300 C120,250 170,350 320,320 S520,250 610,330 S820,420 1010,300" stroke="#B8E4FF" stroke-width="9" fill="none" stroke-dasharray="24 30"/>
-    <ellipse cx="420" cy="560" rx="70" ry="30" fill="#6EC6FF" opacity=".85"/>
+    <ellipse cx="150" cy="370" rx="62" ry="24" fill="#6EC6FF" opacity=".85"/>
     ${trees}${edges}${nodes}
-    ${QS().chestBy==null?`<g class="qchest" transform="translate(500,600)"><rect x="-120" y="-20" width="240" height="34" rx="17" fill="#fff" opacity=".9"/><text y="4" text-anchor="middle" font-size="17" font-weight="800" fill="#7a4b00">🎁 有一站藏著寶箱，第一個通過的小隊 +2！</text></g>`:""}<g transform="translate(30,40)"><circle r="20" fill="#fff" opacity=".85"/><path d="M0,-15 L6,4 L0,0 L-6,4 Z" fill="#E0312B"/><text y="15" text-anchor="middle" font-size="11" font-weight="900" fill="#2A1F5C">N</text></g></svg>`}
+    ${QS().chestBy==null?`<g class="qchest" transform="translate(300,32)"><rect x="-120" y="-20" width="240" height="34" rx="17" fill="#fff" opacity=".9"/><text y="4" text-anchor="middle" font-size="17" font-weight="800" fill="#7a4b00">🎁 有一站藏著寶箱，第一個通過的小隊 +2！</text></g>`:""}<g transform="translate(30,40)"><circle r="20" fill="#fff" opacity=".85"/><path d="M0,-15 L6,4 L0,0 L-6,4 Z" fill="#E0312B"/><text y="15" text-anchor="middle" font-size="11" font-weight="900" fill="#2A1F5C">N</text></g></svg>`}
 function qBadgeMini(t,s){const d=qT(t).done[s.id];return d?`<g transform="translate(26,-62)">${qBadge(s,d.lv,40).replace("<svg ","<svg x=\"0\" y=\"0\" ")}</g>`:""}
 
 function renderQuest(app){const c=cls();QS();
@@ -3077,7 +3086,7 @@ function renderQuest(app){const c=cls();QS();
   const cb=mapBox.querySelector("#qcancel");if(cb)cb.onclick=()=>{view.qpick=null;render()};
   const side=$(`<div class="side qside"></div>`);
   c.teams.forEach((tn,t)=>{const T=qT(t),cur=T.cur;
-    const badges=QCH.map(s=>T.done[s.id]?qBadge(s,T.done[s.id].lv,30):qEmpty(s,30)).join("");
+    const badges=QCH.map(s=>T.done[s.id]?qBadge(s,T.done[s.id].lv,27):qEmpty(s,27)).join("");
     const left=QCH.some(s=>qState(t,s.id)==="open");
     const el=$(`<div class="tcard qcard ${view.qpick===t?"cur":""}" style="--tc:${TEAMC[t]}">
       <div class="trow"><span class="av" style="background:${TEAMC[t]}">${AV(t)}</span><span class="tname">${esc(tn)}</span><span class="qpts">⭐ ${qPts(t)}</span></div>
